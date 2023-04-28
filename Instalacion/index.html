@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Instalación de Docker Desktop en Fedora 37 - My Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Instalaci\u00f3n de Docker Desktop en Fedora 37";
+        var mkdocs_page_input_path = "Instalacion.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> My Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Inicio%20de%20contenedores/">Inicio de contenedores</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Instalación de Docker Desktop en Fedora 37</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#requisitos-previos">Requisitos previos</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Servidor%20nginx/">Instalación del servidor nginx</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">My Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Instalación de Docker Desktop en Fedora 37</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="instalacion-de-docker-desktop-en-fedora-37">Instalación de Docker Desktop en Fedora 37</h1>
+<p>La versión de Docker Desktop nos permite lanzar contenedores tanto en modo gráfico como desde la terminal.</p>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<p>Para instalar Docker necesitamos la terminal de Gnome, como uso KDE, voy a instalar la terminal con el siguiente comando</p>
+<p>``` 
+sudo dnf install gnome-terminal-3.46.8-1.fc37.x86_64</p>
+<pre><code>
+## Instalación
+
+Una vez instalada vamos a añadir los repositorios de Docker
+
+</code></pre>
+<p>sudo dnf -y install dnf-plugins-core</p>
+<p>sudo dnf config-manager \
+    --add-repo \
+    https://download.docker.com/linux/fedora/docker-ce.repo</p>
+<pre><code>
+Después descargamos el archivo rpm de docker y abrimos la carpeta de descarga en la terminal. He descargado la versión 4.18.0 así que la instalo con el siguiente comando
+
+</code></pre>
+<p>sudo dnf install ./docker-desktop-4.18.0-x86_64.rpm</p>
+<pre><code>
+El instalador nos pedirá que importemos la clave gpg de Docker, le damos a Y para aceptar.
+
+## Comprobaciones
+
+Una vez instalado lo iniciaremos con el siguiente comando
+
+</code></pre>
+<p>systemctl --user enable docker-desktop</p>
+<pre><code>
+Si queremos que Docker se inicialice cada vez que se reinicie el ordenador ejecutamos lo siguiente
+
+</code></pre>
+<p>systemctl --user enable docker-desktop</p>
+<pre><code>
+Podemos comprobar si se ha instalado correctamente viendo la version de Docker y también ejecutando un contenedor de prueba.
+
+</code></pre>
+<p>docker -v
+docker run hello-world</p>
+<pre><code>
+Docker descargará el contenedor y lo ejecutará. Si lo ejecuta correctamente mostrará este mensaje
+
+</code></pre>
+<p>Hello from Docker!<br />
+This message shows that your installation appears to be working correctly.  </p>
+<p>To generate this message, Docker took the following steps:<br />
+1. The Docker client contacted the Docker daemon.<br />
+2. The Docker daemon pulled the "hello-world" image from the Docker Hub.<br />
+   (amd64)<br />
+3. The Docker daemon created a new container from that image which runs the<br />
+   executable that produces the output you are currently reading.<br />
+4. The Docker daemon streamed that output to the Docker client, which sent it<br />
+   to your terminal.  </p>
+<p>To try something more ambitious, you can run an Ubuntu container with:<br />
+$ docker run -it ubuntu bash  </p>
+<p>Share images, automate workflows, and more with a free Docker ID:<br />
+https://hub.docker.com/  </p>
+<p>For more examples and ideas, visit:<br />
+https://docs.docker.com/get-started/
+```</p>
+<p>Hecho esto, ya está instalado docker desktop y podremos <a href="../Inicio%20de%20contenedores/">iniciar contenedores en modo gráfico</a>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../Inicio%20de%20contenedores/" class="btn btn-neutral float-left" title="Inicio de contenedores"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Servidor%20nginx/" class="btn btn-neutral float-right" title="Instalación del servidor nginx">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../Inicio%20de%20contenedores/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../Servidor%20nginx/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
