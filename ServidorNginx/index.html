@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Inicio de contenedores - My Docs</title>
+    <title>Instalación del servidor nginx - My Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Inicio de contenedores";
-        var mkdocs_page_input_path = "Inicio de contenedores.md";
+        var mkdocs_page_name = "Instalaci\u00f3n del servidor nginx";
+        var mkdocs_page_input_path = "ServidorNginx.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -40,16 +40,22 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Inicio de contenedores</a>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Repositorio de sistemas</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../Instalacion/">Instalación de Docker Desktop en Fedora 37</a>
                 </li>
               </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Instalación del servidor nginx</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Servidor%20nginx/">Instalación del servidor nginx</a>
+                <li class="toctree-l1"><a class="reference internal" href="../iniciocontenedores/">Iniciocontenedores</a>
                 </li>
               </ul>
       </div>
@@ -66,7 +72,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Inicio de contenedores</li>
+      <li>Instalación del servidor nginx</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -75,58 +81,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>Abrimos Docker desde el lanzador de aplicaciones o desde la consola con el comando </p>
-<pre><code>systemctl --user start docker-desktop
-</code></pre>
-<p>La primera vez que lo abrimos nos pide que aceptemos los términos de uso. También nos mostrará un pequeño formulario para saber el uso que le vamos a dar a Docker. Una vez hecho esto podemos añadir contenedores. </p>
-<p>Vamos a descargar el contenedor de bienvenida de Docker con git</p>
-<pre><code>git clone https://github.com/docker/welcome-to-docker
-</code></pre>
-<p>Entramos en la carpeta que hemos descargado de git y creamos un archivo Dockerfile. En el Dockerfile escribimos las instrucciones. Estas son las instrucciones que nos da Docker para su contenedor de bienvenida.</p>
-<pre><code># syntax=docker/dockerfile:1
-
-# Start your image with a node base image
-FROM node:18-alpine
-
-# Create an application directory
-RUN mkdir -p /app
-
-# Set the /app directory as the working directory for any command that follows
-WORKDIR /app
-
-# Copy the local app package and package-lock.json file to the container
-COPY package*.json ./
-
-# Copy local directories to the working directory of our docker image (/app)
-COPY ./src ./src
-COPY ./public ./public
-
-# Install node packages, install serve, build the app, and remove dependencies at the end
-RUN npm install \
-    &amp;&amp; npm install -g serve \
-    &amp;&amp; npm run build \
-    &amp;&amp; rm -fr node_modules
-
-# Specify that the application in the container listens on port 3000
-EXPOSE 3000
-
-# Start the app using serve command
-CMD [ &quot;serve&quot;, &quot;-s&quot;, &quot;build&quot; ]
-</code></pre>
-<p>Docker necesita una imagen para ejecutar el contenedor, la construiremos con el siguiente comando</p>
-<pre><code>docker build -t welcome-to-docker .
-</code></pre>
-<p>Al construir con éxito la imagen, aparecerá en Images en Docker Desktop.</p>
-<p><img alt="" src="../images.png" /></p>
-<p>Le damos al botón de run y en configuraciones opcionales ponemos el puerto en el que se va a desplegar el contenedor. Hecho esto le damos a run y se desplegará el contenedor.</p>
-<p><img alt="" src="../puerto.png" /></p>
-<p>Si entramos en localhost:8089 podemos comprobar que nuestro contenedor se ha desplegado con éxito.</p>
-<p><img alt="" src="../funcionando.png" /></p>
+                <h1 id="instalacion-del-servidor-nginx">Instalación del servidor nginx</h1>
+<ol>
+<li>Pantallazo donde se vea la creación del contenedor y podamos comprobar que el contenedor está funcionando.
+<img alt="" src="../nginx_instalado.png" /></li>
+<li>Pantallazo donde se vea el acceso al servidor web utilizando un navegador web (recuerda que tienes que acceder a la ip del ordenador donde tengas instalado docker)
+<img alt="" src="../nginx_firefoz.png" /></li>
+<li>Pantallazo donde se vean las imágenes que tienes en tu registro local.
+<img alt="" src="../docker_images.png" /></li>
+<li>Pantallazo donde se vea como se elimina el contenedor (recuerda que antes debe estar parado el contenedor).</li>
+</ol>
+<p><img alt="" src="../nginx_parado.png" /></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../Instalacion/" class="btn btn-neutral float-right" title="Instalación de Docker Desktop en Fedora 37">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Instalacion/" class="btn btn-neutral float-left" title="Instalación de Docker Desktop en Fedora 37"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../iniciocontenedores/" class="btn btn-neutral float-right" title="Iniciocontenedores">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -149,8 +120,10 @@ CMD [ &quot;serve&quot;, &quot;-s&quot;, &quot;build&quot; ]
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../Instalacion/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="../Instalacion/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="../iniciocontenedores/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
